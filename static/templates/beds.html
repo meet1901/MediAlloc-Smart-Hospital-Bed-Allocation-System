@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center mb-4">Bed Layout by Department</h2>
+
+<!-- Legend -->
+<div class="mb-4">
+    <strong>Priority:</strong>
+    <span class="legend red">Extreme</span>
+    <span class="legend orange">High</span>
+    <span class="legend brown">Moderate</span>
+    <span class="legend green">Normal</span>
+    <span class="legend grey">Empty</span>
+    <span class="legend yellow">Shifted</span>
+</div>
+
+{% for dept in departments %}
+<div class="card p-4 mb-5 shadow">
+    <h4 class="mb-3">{{ dept.name }}</h4>
+
+    <div class="row">
+
+        <!-- Ward A -->
+        <div class="col-md-6">
+            <h5>Ward A</h5>
+            <div class="bed-container">
+                {% for bed in dept.beds[:8] %}
+
+                {% set patient = bed_patient_map.get(bed.id) %}
+
+                {% if not patient %}
+                {% set color = "grey" %}
+                {% elif patient.is_shifted %}
+                {% set color = "yellow" %}
+                {% elif patient.severity == "Extreme" %}
+                {% set color = "red" %}
+                {% elif patient.severity == "High" %}
+                {% set color = "orange" %}
+                {% elif patient.severity == "Moderate" %}
+                {% set color = "brown" %}
+                {% else %}
+                {% set color = "green" %}
+                {% endif %}
+
+                <!-- Bed Box -->
+                <div class="bed-box {{ color }}" data-bs-toggle="modal" data-bs-target="#bedModal{{ bed.id }}">
+                    {{ bed.bed_number }}
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="bedModal{{ bed.id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title">Bed {{ bed.bed_number }} Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                {% if patient %}
+                                <p><strong>Name:</strong> {{ patient.name }}</p>
+                                <p><strong>Age:</strong> {{ patient.age }}</p>
+                                <p><strong>Disease:</strong> {{ patient.disease }}</p>
+                                <p><strong>Priority:</strong> {{ patient.severity }}</p>
+                                <p><strong>Department:</strong> {{ dept.name }}</p>
+
+                                <p><strong>Shifted:</strong>
+                                    {% if patient.is_shifted %}
+                                    Yes
+                                    {% else %}
+                                    No
+                                    {% endif %}
+                                </p>
+                                {% else %}
+                                <p>No patient assigned (Empty Bed)</p>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Ward B -->
+        <div class="col-md-6">
+            <h5>Ward B</h5>
+            <div class="bed-container">
+                {% for bed in dept.beds[8:] %}
+
+                {% set patient = bed_patient_map.get(bed.id) %}
+
+                {% if not patient %}
+                {% set color = "grey" %}
+                {% elif patient.is_shifted %}
+                {% set color = "yellow" %}
+                {% elif patient.severity == "Extreme" %}
+                {% set color = "red" %}
+                {% elif patient.severity == "High" %}
+                {% set color = "orange" %}
+                {% elif patient.severity == "Moderate" %}
+                {% set color = "brown" %}
+                {% else %}
+                {% set color = "green" %}
+                {% endif %}
+
+                <!-- Bed Box -->
+                <div class="bed-box {{ color }}" data-bs-toggle="modal" data-bs-target="#bedModal{{ bed.id }}">
+                    {{ bed.bed_number }}
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="bedModal{{ bed.id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title">Bed {{ bed.bed_number }} Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                {% if patient %}
+                                <p><strong>Name:</strong> {{ patient.name }}</p>
+                                <p><strong>Age:</strong> {{ patient.age }}</p>
+                                <p><strong>Disease:</strong> {{ patient.disease }}</p>
+                                <p><strong>Priority:</strong> {{ patient.severity }}</p>
+                                <p><strong>Department:</strong> {{ dept.name }}</p>
+
+                                <p><strong>Shifted:</strong>
+                                    {% if patient.is_shifted %}
+                                    Yes
+                                    {% else %}
+                                    No
+                                    {% endif %}
+                                </p>
+                                {% else %}
+                                <p>No patient assigned (Empty Bed)</p>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

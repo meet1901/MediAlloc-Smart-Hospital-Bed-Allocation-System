@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Waiting List</h2>
+
+<div class="card shadow border-0 p-3">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-warning">
+                <tr>
+                    <th>Waiting ID</th>
+                    <th>Patient Name</th>
+                    <th>Department</th>
+                    <th>Priority</th>
+                    <th>Queue Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in waiting_patients %}
+                <tr>
+                    <td>{{ entry.id }}</td>
+                    <td>{{ entry.patient.name }}</td>
+                    <td>{{ entry.department.name }}</td>
+                    <td>{{ entry.priority }}</td>
+                    <td>{{ entry.queue_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+.bed-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.bed-box {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+/* COLORS */
+.red {
+    background-color: #d9534f;
+}
+
+.orange {
+    background-color: #f0ad4e;
+}
+
+.brown {
+    background-color: #8b4513;
+}
+
+.green {
+    background-color: #28a745;
+}
+
+.grey {
+    background-color: #d6d6d6;
+    color: black;
+}
+
+.yellow {
+    background-color: #0d6efd;
+    color: white;
+}
+
+
+/* Legend styling */
+.legend {
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+}
+
+.legend.grey {
+    color: black;
+}
+
+.legend.yellow {
+    color: white;
+}
+
+
+h5 {
+    margin-bottom: 10px;
+    font-weight: 600;
+}

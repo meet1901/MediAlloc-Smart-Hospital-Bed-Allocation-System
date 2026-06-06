@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center mb-4">MediAlloc - Bed Allocation System</h1>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card shadow border-0">
+            <div class="card-body text-center">
+                <h3>Nephrology</h3>
+                <p class="mb-1"><strong>Occupied:</strong> {{ nephrology_count }}/15</p>
+                <p class="text-success"><strong>Available:</strong> {{ 15 - nephrology_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow border-0">
+            <div class="card-body text-center">
+                <h3>Neurology</h3>
+                <p class="mb-1"><strong>Occupied:</strong> {{ neurology_count }}/15</p>
+                <p class="text-success"><strong>Available:</strong> {{ 15 - neurology_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow border-0">
+            <div class="card-body text-center">
+                <h3>Cardiology</h3>
+                <p class="mb-1"><strong>Occupied:</strong> {{ cardiology_count }}/15</p>
+                <p class="text-success"><strong>Available:</strong> {{ 15 - cardiology_count }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <a href="/add_patient" class="btn btn-primary btn-lg">Admit New Patient</a>
+</div>
+{% endblock %}

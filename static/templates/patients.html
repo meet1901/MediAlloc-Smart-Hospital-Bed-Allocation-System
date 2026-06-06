@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Patient List</h2>
+
+<div class="card shadow border-0 p-3">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Disease</th>
+                    <th>Required Department</th>
+                    <th>Assigned Department</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Shifted</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.id }}</td>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.age }}</td>
+                    <td>{{ patient.disease }}</td>
+                    <td>{{ patient.required_department.name }}</td>
+                    <td>
+                        {% if patient.assigned_department %}
+                        {{ patient.assigned_department.name }}
+                        {% else %}
+                        Not Assigned
+                        {% endif %}
+                    </td>
+                    <td>{{ patient.severity }}</td>
+                    <td>{{ patient.status }}</td>
+                    <td>{{ "Yes" if patient.is_shifted else "No" }}</td>
+                    <td>
+                        {% if patient.status == "active" %}
+                        <a href="/discharge/{{ patient.id }}" class="btn btn-danger btn-sm">Discharge</a>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
